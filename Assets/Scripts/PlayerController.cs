@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (horizontal > 0)
         {
-            transform.eulerAngles = Vector3.one;
+            transform.eulerAngles = Vector3.zero;
         }
 
         // reduce speed on diagonal
