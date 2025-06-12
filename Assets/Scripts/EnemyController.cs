@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
 
     public float moveSpeed = 1.0f;
+    public float contactDamage = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

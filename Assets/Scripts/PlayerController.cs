@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,11 +14,17 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 1.0f;
 
+    [Header("Health")]
+    public HealthBarController hb;
+    public float maxHealth = 100.0f;
+    public float currentHealth = 100.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        hb.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -56,5 +64,17 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2 (horizontal * moveSpeed, vertical * moveSpeed);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("enemy collision stay");
+            EnemyController ec = collision.gameObject.GetComponent<EnemyController>();
+            float damage = ec.contactDamage;
+            hb.ApplyDamage(damage);
+            currentHealth -= damage;
+        }
     }
 }
