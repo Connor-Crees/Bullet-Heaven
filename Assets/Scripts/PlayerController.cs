@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using Unity.Hierarchy;
 using UnityEngine;
@@ -7,11 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer sr;
 
     private float horizontal;
     private float vertical;
     private float diagonalScaler = 0.7f;
 
+    [Header("Move Speed")]
     public float moveSpeed = 1.0f;
 
     [Header("Health")]
@@ -19,12 +22,21 @@ public class PlayerController : MonoBehaviour
     public float maxHealth = 100.0f;
     public float currentHealth = 100.0f;
 
+    [Header("Damage Invuln")]
+    private bool invuln = false;
+    public float invulnTime = 1.0f;
+
+    [Header("Game Objects")]
+    public GameObject blood;
+    public AudioSource hurtSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         hb.SetMaxHealth(maxHealth);
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -46,14 +58,14 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Walking", false);
         }
 
-        // flip horizontal scale
+        // flip sprite
         if (horizontal < 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            sr.flipX = true;
         }
         else if (horizontal > 0)
         {
-            transform.eulerAngles = Vector3.zero;
+            sr.flipX = false;
         }
 
         // reduce speed on diagonal
@@ -66,15 +78,46 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2 (horizontal * moveSpeed, vertical * moveSpeed);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            blood.SetActive(true);
+            sr.color = Color.red;
+            hurtSound.Play();
+            hurtSound.loop = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            blood.SetActive(false);
+            sr.color = Color.white;
+            hurtSound.loop = false;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("enemy collision stay");
-            EnemyController ec = collision.gameObject.GetComponent<EnemyController>();
-            float damage = ec.contactDamage;
-            hb.ApplyDamage(damage);
-            currentHealth -= damage;
+            if (!invuln)
+            {
+                invuln = true;
+                StartCoroutine(Invuln());
+                EnemyController ec = collision.gameObject.GetComponent<EnemyController>();
+                float damage = ec.contactDamage;
+                hb.ApplyDamage(damage);
+                currentHealth -= damage;
+            }
         }
+    }
+
+    private IEnumerator Invuln()
+    {
+        yield return new WaitForSeconds(invulnTime);
+        invuln = false;
     }
 }
