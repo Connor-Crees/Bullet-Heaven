@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float vertical;
     private float diagonalScaler = 0.7f;
 
+    private bool invuln = false;
+
     [Header("Move Speed")]
     public float moveSpeed = 1.0f;
 
@@ -23,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public float currentHealth = 100.0f;
 
     [Header("Damage Invuln")]
-    private bool invuln = false;
     public float invulnTime = 1.0f;
 
     [Header("Game Objects")]
