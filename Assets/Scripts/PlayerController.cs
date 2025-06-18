@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private bool invuln = false;
 
+    private int enemyCollisionCount = 0;
+
     [Header("Move Speed")]
     public float moveSpeed = 1.0f;
 
@@ -83,10 +85,17 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            blood.SetActive(true);
-            sr.color = Color.red;
-            hurtSound.Play();
-            hurtSound.loop = true;
+            enemyCollisionCount++;
+            if (enemyCollisionCount == 1)
+            {
+                blood.SetActive(true);
+                sr.color = Color.red;
+                if (!hurtSound.isPlaying)
+                {
+                    hurtSound.Play();
+                }
+                hurtSound.loop = true;
+            }
         }
     }
 
@@ -94,9 +103,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            blood.SetActive(false);
-            sr.color = Color.white;
-            hurtSound.loop = false;
+            enemyCollisionCount--;
+            if (enemyCollisionCount == 0)
+            {
+                blood.SetActive(false);
+                sr.color = Color.white;
+                hurtSound.loop = false;
+            }
         }
     }
 
