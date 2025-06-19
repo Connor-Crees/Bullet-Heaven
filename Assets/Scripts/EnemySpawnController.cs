@@ -5,13 +5,16 @@ public class EnemySpawnController : MonoBehaviour
 {
     GameObject player;
 
-    public GameObject slime;
+    public GameObject[] fodder;
+    private int fodderNum = 0;
+
+    public float fodderInterval;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        StartCoroutine(spawnSlimes(2.0f));
+        StartCoroutine(spawnFodder(fodderInterval));
     }
 
     // Update is called once per frame
@@ -20,7 +23,7 @@ public class EnemySpawnController : MonoBehaviour
         
     }
 
-    private IEnumerator spawnSlimes(float interval)
+    private IEnumerator spawnFodder(float interval)
     {
         while (true)
         {
@@ -30,7 +33,7 @@ public class EnemySpawnController : MonoBehaviour
                 Vector2 position = new Vector2(player.transform.localPosition.x + Random.Range(-10.0f, 10.0f), player.transform.localPosition.y + Random.Range(-10.0f, 10.0f));
                 if (Vector2.Distance(position, player.transform.localPosition) > 10.0f)
                 {
-                    Instantiate(slime, position, Quaternion.identity);
+                    Instantiate(fodder[fodderNum % fodder.Length], position, Quaternion.identity);
                     break;
                 }
             }

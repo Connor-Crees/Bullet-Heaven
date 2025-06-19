@@ -45,10 +45,10 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Weapon")
+        if(collision.gameObject.tag == "Projectile")
         {
-            WeaponController wc = collision.GetComponent<WeaponController>();
-            float damage = wc.damage;
+            ProjectileController pc = collision.GetComponentInParent<ProjectileController>();
+            float damage = pc.damage;
             hb.ApplyDamage(damage);
             currentHealth -= damage;
             if (currentHealth <= 0)

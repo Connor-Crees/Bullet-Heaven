@@ -577,34 +577,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 404477924021154353, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 888555819306752468, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 888555819306752468, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 888555819306752468, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 888555819306752468, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 3140788072796044530, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: attackSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4821877996352067566, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: hitSound
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7459262801686196199, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
       propertyPath: m_Name
       value: Vampire PC
@@ -649,14 +621,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9039730862810103305, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: fa75a35a34b8eb44d9650993e7d4bb3f, type: 3}
-    - target: {fileID: 9039730862810103305, guid: 6bf33c5746891314dbf0694f185916cc, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fa75a35a34b8eb44d9650993e7d4bb3f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -714,14 +678,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawn Controller
       objectReference: {fileID: 0}
-    - target: {fileID: 1180251123143244660, guid: 7811a4274a5bdc94caf3b1a383c5a946, type: 3}
-      propertyPath: m_TagString
-      value: EnemySpawnController
-      objectReference: {fileID: 0}
-    - target: {fileID: 6357708431940558986, guid: 7811a4274a5bdc94caf3b1a383c5a946, type: 3}
-      propertyPath: slime
-      value: 
-      objectReference: {fileID: 5846907362525486866, guid: 45de7eb7d07ca9047b55606a9914aba1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
