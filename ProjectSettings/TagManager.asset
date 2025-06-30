@@ -54,6 +54,9 @@ TagManager:
   - name: Enemies
     uniqueID: 3691042849
     locked: 0
+  - name: Neutrals
+    uniqueID: 937505351
+    locked: 0
   - name: Weapons
     uniqueID: 2731832483
     locked: 0

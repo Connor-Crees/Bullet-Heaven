@@ -134,4 +134,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(invulnTime);
         invuln = false;
     }
+
+    public void Heal(float amount)
+    {
+        hb.ApplyDamage(-amount);
+        currentHealth += amount;
+    }
 }
