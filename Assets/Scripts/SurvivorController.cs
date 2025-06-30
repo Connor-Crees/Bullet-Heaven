@@ -7,6 +7,7 @@ public class SurvivorController : MonoBehaviour
     public GameObject survivor;
     public GameObject blood;
     public GameObject interactUI;
+    public AudioSource deathSound;
 
     [Header("Values")]
     public float healAmount = 20.0f;
@@ -66,7 +67,8 @@ public class SurvivorController : MonoBehaviour
 
     private IEnumerator playerEat()
     {
-        yield return new WaitForSeconds(1.0f);
+        deathSound.Play();
+        yield return new WaitForSeconds(deathSound.clip.length);
         pc.Heal(healAmount);
         Destroy(gameObject);
     }
