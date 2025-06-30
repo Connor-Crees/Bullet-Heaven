@@ -4,8 +4,8 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class EnemyController : MonoBehaviour
 {
     private Transform player;
-    private Vector3 initialScale;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     public float moveSpeed = 1.0f;
     public float contactDamage = 1.0f;
@@ -20,8 +20,8 @@ public class EnemyController : MonoBehaviour
     {
         hb.SetMaxHealth(maxHealth);
         player = GameObject.FindWithTag("Player").transform;
-        initialScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,14 +32,14 @@ public class EnemyController : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
 
         float horizontal = transform.position.x - player.position.x;
-        // flip horizontal scale
-        if (horizontal > 0)
+        // flip sprite
+        if (horizontal < 0)
         {
-            transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
+            sr.flipX = true;
         }
-        else if (horizontal < 0)
+        else if (horizontal > 0)
         {
-            transform.localScale = new Vector3(initialScale.x, initialScale.y, initialScale.z);
+            sr.flipX = false;
         }
     }
 

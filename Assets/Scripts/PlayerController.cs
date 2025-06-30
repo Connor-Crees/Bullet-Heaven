@@ -123,8 +123,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Invuln());
                 EnemyController ec = collision.gameObject.GetComponent<EnemyController>();
                 float damage = ec.contactDamage;
-                hb.ApplyDamage(damage);
-                currentHealth -= damage;
+                Damage(damage);
             }
         }
     }
@@ -135,9 +134,30 @@ public class PlayerController : MonoBehaviour
         invuln = false;
     }
 
+    public void Damage(float amount)
+    {
+        float damage = amount;
+        if(currentHealth - amount < 0)
+        {
+            damage = currentHealth;
+        }
+        currentHealth -= damage;
+        if (damage > 0)
+        {
+            hb.ApplyDamage(damage);
+        }
+    }
     public void Heal(float amount)
     {
-        hb.ApplyDamage(-amount);
-        currentHealth += amount;
+        float healing = amount;
+        if (currentHealth + amount > maxHealth)
+        {
+            healing = maxHealth - currentHealth;
+        }
+        currentHealth += healing;
+        if (healing > 0)
+        {
+            hb.ApplyDamage(-healing);
+        }
     }
 }
