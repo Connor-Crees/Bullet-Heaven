@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource hitSound;
 
     public float moveSpeed = 1.0f;
     public float contactDamage = 1.0f;
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        hitSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,8 +51,10 @@ public class EnemyController : MonoBehaviour
         {
             ProjectileController pc = collision.GetComponentInParent<ProjectileController>();
             float damage = pc.damage;
+            pc.DamagePopup(damage, transform.position);
             hb.ApplyDamage(damage);
             currentHealth -= damage;
+            hitSound.Play();
             if (currentHealth <= 0)
             {
                 Death();
